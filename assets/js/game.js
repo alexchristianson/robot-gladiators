@@ -163,12 +163,22 @@ var fightOrSkip = function() {
 
 // fight function
 var fight = function(enemy) {
+    var isPlayerTurn = true;
+
+    if (Math.random() > 0.5) {
+        isPlayerTurn = false;
+    }
+
     // repeat and excute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0) {
-        // ask player if they'd like to fight or run
-        if (fightOrSkip()) {
-            // if true, leave fight by breaking loop
-            break;
+        if (isPlayerTurn) {
+
+    
+            // ask player if they'd like to fight or run
+            if (fightOrSkip()) {
+                // if true, leave fight by breaking loop
+                break;
+            }
         }
 
         // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
@@ -209,6 +219,8 @@ var fight = function(enemy) {
     } else {
         window.alert(playerInfo.name + " stil has " + playerInfo.health + " health left.");
         }
+        // switch turn order for next round
+        isPlayerTurn = !isPlayerTurn;
     } 
 };
 
